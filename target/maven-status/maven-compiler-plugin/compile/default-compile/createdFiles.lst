@@ -1,0 +1,7 @@
+org\maxkizi\socialnetworkbackend\SocialNetworkBackendApplication.class
+org\maxkizi\socialnetworkbackend\controller\Controllers.class
+org\maxkizi\socialnetworkbackend\service\impl\UserServiceImpl.class
+org\maxkizi\socialnetworkbackend\repository\UserRepository.class
+org\maxkizi\socialnetworkbackend\service\UserService.class
+org\maxkizi\socialnetworkbackend\controller\UserController.class
+org\maxkizi\socialnetworkbackend\entity\User.class

@@ -1,6 +1,7 @@
 package org.maxkizi.socialnetworkbackend.entity;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -9,6 +10,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Data
 @NoArgsConstructor
+@Builder()
 @Entity
 @Table(name = "users")
 public class User {
@@ -28,6 +30,6 @@ public class User {
     @Column(name = "status")
     private String status;
     @Column(name = "info")
-    private String aboutMe;
+    private String info;
 
 }

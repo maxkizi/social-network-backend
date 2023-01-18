@@ -2,11 +2,13 @@ package org.maxkizi.socialnetworkbackend.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.maxkizi.socialnetworkbackend.entity.User;
+import org.maxkizi.socialnetworkbackend.exception.UserNotFoundException;
 import org.maxkizi.socialnetworkbackend.repository.UserRepository;
 import org.maxkizi.socialnetworkbackend.service.UserService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -14,7 +16,14 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
 
     @Override
+    @Transactional
     public Page<User> findAll(Pageable pageable) {
         return userRepository.findAll(pageable);
+    }
+
+    @Override
+    @Transactional
+    public User findById(Long id) {
+        return userRepository.findById(id).orElseThrow(UserNotFoundException::new);
     }
 }

@@ -3,9 +3,14 @@ package org.maxkizi.socialnetworkbackend.controller;
 public final class Controllers {
     private static final String BASE_URL = "/api/v1";
     private static final String BY_ID = "/{id}";
+    private static final String PROFILE = BASE_URL + "/profile";
+    private static final String AUTH = "/auth";
+
     public static final String USERS = BASE_URL + "/users";
-    public static final String PROFILE = BASE_URL + "/profile";
-    public static final String PROFILE_BY_ID = BASE_URL + "/profile" + BY_ID ;
+    public static final String PROFILE_BY_ID = PROFILE + BY_ID;
+    public static final String BASE_URL_ASTERISC = BASE_URL + "/*";
+    public static final String BASE_URL_DOUBLE_ASTERISC = BASE_URL + "/**";
+    public static final String ME = BASE_URL + AUTH +  "/me";
 
 
     private Controllers() {

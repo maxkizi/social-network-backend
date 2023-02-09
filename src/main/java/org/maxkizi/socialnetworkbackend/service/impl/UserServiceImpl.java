@@ -7,12 +7,15 @@ import org.maxkizi.socialnetworkbackend.repository.UserRepository;
 import org.maxkizi.socialnetworkbackend.service.UserService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-@Service
+@Service("userServiceImpl")
 @RequiredArgsConstructor
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserService, UserDetailsService {
     private final UserRepository userRepository;
 
     @Override
@@ -25,5 +28,31 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public User findById(Long id) {
         return userRepository.findById(id).orElseThrow(UserNotFoundException::new);
+    }
+
+    @Override
+    @Transactional
+    public User save(User user) {
+        return userRepository.save(user);
+    }
+
+    @Override
+    @Transactional
+    public User update(Long id, User user) {
+        userRepository.findById(id).orElseThrow(UserNotFoundException::new);
+        return userRepository.save(user);
+    }
+
+    @Override
+    @Transactional
+    public void delete(Long id) {
+        userRepository.findById(id).orElseThrow(UserNotFoundException::new);
+        userRepository.deleteById(id);
+    }
+
+    @Override
+    @Transactional
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return userRepository.findByUsername(username).orElseThrow(UserNotFoundException::new);
     }
 }

@@ -1,0 +1,46 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+
+    <changeSet author="maxkizi" id="2023-01-18-update-users-table">
+
+        <addColumn tableName="users">
+            <column afterColumn="info"
+                    name="username"
+                    type="text"/>
+        </addColumn>
+
+        <addColumn tableName="users">
+            <column afterColumn="username"
+                    name="password"
+                    type="text"/>
+        </addColumn>
+
+        <addColumn tableName="users">
+            <column afterColumn="password"
+                    name="is_account_non_expired"
+                    type="boolean"/>
+        </addColumn>
+
+        <addColumn tableName="users">
+            <column afterColumn="is_account_non_expired"
+                    name="is_account_non_locked"
+                    type="boolean"/>
+        </addColumn>
+
+        <addColumn tableName="users">
+            <column afterColumn="is_account_non_locked"
+                    name="is_credentials_non_expired"
+                    type="boolean"/>
+        </addColumn>
+
+        <addColumn tableName="users">
+            <column afterColumn="is_credentials_non_expired"
+                    name="is_enabled"
+                    type="boolean"/>
+        </addColumn>
+
+    </changeSet>
+</databaseChangeLog>

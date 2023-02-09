@@ -1,13 +1,9 @@
 spring:
-  datasource:
-    url: jdbc:postgresql://localhost:5432/social_network
-    password: postgres
-    username: postgres
   jpa:
+    open-in-view: false
+    show-sql: true
     hibernate:
       ddl-auto: none
-    show-sql: true
-    open-in-view: false
-
   liquibase:
     change-log: db/liquibase-changelog.xml
+

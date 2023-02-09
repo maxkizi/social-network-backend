@@ -1,0 +1,89 @@
+package org.maxkizi.socialnetworkbackend.config.security;
+
+import lombok.RequiredArgsConstructor;
+import org.maxkizi.socialnetworkbackend.controller.Controllers;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.OncePerRequestFilter;
+
+import java.util.List;
+
+import static org.maxkizi.socialnetworkbackend.controller.Controllers.ME;
+
+
+@Configuration
+@EnableWebSecurity
+@RequiredArgsConstructor
+@ConditionalOnProperty(name = "security.enabled", havingValue = "true")
+public class SecurityEnabledConfig {
+
+
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http
+                .sessionManagement()
+                .and()
+                    .cors()
+                .and()
+                    .csrf().disable()
+                .authorizeRequests()
+                    .antMatchers(Controllers.BASE_URL_DOUBLE_ASTERISC).authenticated()
+                .and()
+                    .formLogin()
+                    .successHandler(new SimpleUrlAuthenticationSuccessHandler(ME))
+                .and()
+                    .logout()
+                    .logoutUrl("/logout")
+                    .logoutRequestMatcher(new AntPathRequestMatcher("/logout", HttpMethod.GET.name()))
+                    .clearAuthentication(true)
+                    .invalidateHttpSession(true)
+                    .deleteCookies("JSESSIONID");
+
+        return http.build();
+    }
+
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource(){
+        CorsConfiguration corsConfiguration = new CorsConfiguration();
+        corsConfiguration.setAllowedOrigins(List.of("http://localhost:3000"));
+        corsConfiguration.setAllowedMethods(List.of("GET", "POST"));
+        corsConfiguration.setAllowCredentials(true);
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", corsConfiguration);
+        return source;
+    }
+
+    @Bean
+    public DaoAuthenticationProvider daoAuthenticationProvider(@Qualifier("userServiceImpl") UserDetailsService userDetailsService,
+                                                               PasswordEncoder encoder) {
+        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+        provider.setPasswordEncoder(encoder);
+        provider.setUserDetailsService(userDetailsService);
+        return provider;
+    }
+
+    @Bean
+    public AuthenticationManager authenticationManager(HttpSecurity http,
+                                                       DaoAuthenticationProvider daoAuthenticationProvider) throws Exception {
+        return http.getSharedObject(AuthenticationManagerBuilder.class)
+                .authenticationProvider(daoAuthenticationProvider)
+                .build();
+    }
+}

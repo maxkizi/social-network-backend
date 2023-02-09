@@ -1,5 +1,25 @@
 package org.maxkizi.socialnetworkbackend;
 
-public class TestDataProvider {
+import org.maxkizi.socialnetworkbackend.entity.User;
+import org.springframework.stereotype.Component;
 
+@Component
+public class TestDataProvider {
+    public User buildUser(int i) {
+        return User.builder()
+                .info("info" + i)
+                .isFollowed(true)
+                .userPhotoUrl("url" + i)
+                .lastName("lastname" + i)
+                .firstName("firstname" + i)
+                .country("country" + i)
+                .status("status" + i)
+                .username("username" + i)
+                .password("password" + i)
+                .isAccountNonExpired(true)
+                .isAccountNonLocked(true)
+                .isEnabled(true)
+                .isCredentialsNonExpired(true)
+                .build();
+    }
 }

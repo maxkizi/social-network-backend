@@ -18,7 +18,6 @@ class UserDtoConverterTest {
         Assertions.assertEquals(shortDto.getFirstName(), user.getFirstName());
         Assertions.assertEquals(shortDto.getLastName(), user.getLastName());
         Assertions.assertEquals(shortDto.getCountry(), user.getCountry());
-        Assertions.assertEquals(shortDto.isFollowed(), user.isFollowed());
         Assertions.assertEquals(shortDto.getUserPhotoUrl(), user.getUserPhotoUrl());
 
     }
@@ -31,7 +30,6 @@ class UserDtoConverterTest {
         Assertions.assertEquals(dto.getFirstName(), user.getFirstName());
         Assertions.assertEquals(dto.getLastName(), user.getLastName());
         Assertions.assertEquals(dto.getCountry(), user.getCountry());
-        Assertions.assertEquals(dto.isFollowed(), user.isFollowed());
         Assertions.assertEquals(dto.getUserPhotoUrl(), user.getUserPhotoUrl());
         Assertions.assertEquals(dto.getStatus(), user.getStatus());
         Assertions.assertEquals(dto.getInfo(), user.getInfo());
@@ -45,7 +43,6 @@ class UserDtoConverterTest {
                 .country("country")
                 .firstName("maxim")
                 .lastName("kizilov")
-                .isFollowed(true)
                 .build();
     }
 

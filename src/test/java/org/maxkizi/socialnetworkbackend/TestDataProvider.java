@@ -8,7 +8,6 @@ public class TestDataProvider {
     public User buildUser(int i) {
         return User.builder()
                 .info("info" + i)
-                .isFollowed(true)
                 .userPhotoUrl("url" + i)
                 .lastName("lastname" + i)
                 .firstName("firstname" + i)

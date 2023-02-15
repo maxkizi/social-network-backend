@@ -18,7 +18,10 @@
             <column name="country" type="text" remarks="Страна">
                 <constraints nullable="false"/>
             </column>
-            <column name="is_followed" type="boolean" remarks="Статус пользователя">
+            <column name="date_created" type="timestamp" remarks="Дата создания">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date_updated" type="timestamp" remarks="Дата обновления">
                 <constraints nullable="false"/>
             </column>
             <column name="status" type="text" remarks="Статус"/>

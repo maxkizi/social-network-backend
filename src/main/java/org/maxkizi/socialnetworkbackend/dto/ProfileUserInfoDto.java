@@ -21,5 +21,5 @@ public class ProfileUserInfoDto {
     private String info;
     private String createdAt;
     private String updatedAt;
-    private List<PostDto> posts;
+    private List<ShortUserInfoDto> friends;
 }

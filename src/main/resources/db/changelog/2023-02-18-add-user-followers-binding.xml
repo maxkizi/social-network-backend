@@ -1,0 +1,17 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+
+    <changeSet author="maxkizi" id="2023-02-18-add-user-followers-binding">
+        <createTable tableName="user_followers_binding" remarks="Таблица связки пользователя и подписчиков">
+            <column name="user_id" type="bigint" remarks="Ссылка на тиблицу users на поле id">
+                <constraints foreignKeyName="fk_user_followers_binding_user_id" references="users(id)"/>
+            </column>
+            <column name="follower_id" type="bigint" remarks="Ссылка на тиблицу users на поле id">
+                <constraints foreignKeyName="fk_user_followers_binding_follower_id" references="users(id)"/>
+            </column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

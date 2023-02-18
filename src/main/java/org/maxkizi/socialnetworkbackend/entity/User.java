@@ -7,6 +7,7 @@ import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @AllArgsConstructor
 @Data
@@ -29,4 +30,10 @@ public class User extends BaseEntity {
     private String info;
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = {CascadeType.REMOVE})
     private List<Post> posts;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "user_followers_binding",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "follower_id"))
+    private Set<User> friends;
 }

@@ -5,9 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 
 @AllArgsConstructor
 @Data
@@ -15,7 +14,7 @@ import javax.persistence.Table;
 @SuperBuilder(toBuilder = true)
 @Entity
 @Table(name = "users")
-public class User extends UserDetailsImpl {
+public class User extends BaseEntity {
     @Column(name = "photo_url")
     private String userPhotoUrl;
     @Column(name = "first_name")
@@ -28,4 +27,6 @@ public class User extends UserDetailsImpl {
     private String status;
     @Column(name = "info")
     private String info;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = {CascadeType.REMOVE})
+    private List<Post> posts;
 }

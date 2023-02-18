@@ -7,14 +7,16 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.Column;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.Collection;
 import java.util.Collections;
 
-@MappedSuperclass
 @Data
 @SuperBuilder(toBuilder = true)
 @NoArgsConstructor
+@Table(name = "users")
+@Entity
 public class UserDetailsImpl extends BaseEntity implements UserDetails {
     @Column(name = "username")
     private String username;

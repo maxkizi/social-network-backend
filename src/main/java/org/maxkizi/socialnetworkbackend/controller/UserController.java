@@ -3,7 +3,6 @@ package org.maxkizi.socialnetworkbackend.controller;
 import lombok.RequiredArgsConstructor;
 import org.maxkizi.socialnetworkbackend.dto.ProfileUserInfoDto;
 import org.maxkizi.socialnetworkbackend.dto.ShortUserInfoDto;
-import org.maxkizi.socialnetworkbackend.mapper.UserDtoConverter;
 import org.maxkizi.socialnetworkbackend.service.UserService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,18 +16,16 @@ import static org.maxkizi.socialnetworkbackend.controller.Controllers.USERS;
 @RestController
 @RequiredArgsConstructor
 public class UserController {
-
     private final UserService userService;
-    private final UserDtoConverter converter;
 
     @GetMapping(USERS)
     public Page<ShortUserInfoDto> findAll(Pageable pageable) {
-        return userService.findAll(pageable).map(converter::toShortDto);
+        return userService.findAll(pageable);
     }
 
     @GetMapping(PROFILE_BY_ID)
     public ProfileUserInfoDto findById(@PathVariable(name = "id") Long id) {
-        return converter.toDto(userService.findById(id));
+        return userService.findById(id);
     }
 
 }

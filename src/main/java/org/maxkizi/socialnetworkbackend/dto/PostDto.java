@@ -5,21 +5,12 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Data
 @Builder(toBuilder = true)
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProfileUserInfoDto {
-    private Long id;
-    private String userPhotoUrl;
-    private String firstName;
-    private String lastName;
-    private String country;
-    private String status;
-    private String info;
+public class PostDto {
+    private String text;
     private String createdAt;
     private String updatedAt;
-    private List<PostDto> posts;
 }

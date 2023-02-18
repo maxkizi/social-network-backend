@@ -1,8 +1,11 @@
 package org.maxkizi.socialnetworkbackend.service.impl;
 
 import lombok.RequiredArgsConstructor;
-import org.maxkizi.socialnetworkbackend.entity.User;
+import org.maxkizi.socialnetworkbackend.dto.ProfileUserInfoDto;
+import org.maxkizi.socialnetworkbackend.dto.ShortUserInfoDto;
 import org.maxkizi.socialnetworkbackend.exception.UserNotFoundException;
+import org.maxkizi.socialnetworkbackend.mapper.UserDtoConverter;
+import org.maxkizi.socialnetworkbackend.repository.UserDetailsRepository;
 import org.maxkizi.socialnetworkbackend.repository.UserRepository;
 import org.maxkizi.socialnetworkbackend.service.UserService;
 import org.springframework.data.domain.Page;
@@ -17,30 +20,32 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService, UserDetailsService {
     private final UserRepository userRepository;
+    private final UserDetailsRepository userDetailsRepository;
+    private final UserDtoConverter converter;
 
     @Override
     @Transactional
-    public Page<User> findAll(Pageable pageable) {
-        return userRepository.findAll(pageable);
+    public Page<ShortUserInfoDto> findAll(Pageable pageable) {
+        return userRepository.findAll(pageable).map(converter::toShortDto);
     }
 
     @Override
     @Transactional
-    public User findById(Long id) {
-        return userRepository.findById(id).orElseThrow(UserNotFoundException::new);
+    public ProfileUserInfoDto findById(Long id) {
+        return converter.toDto(userRepository.findById(id).orElseThrow(UserNotFoundException::new));
     }
 
     @Override
     @Transactional
-    public User save(User user) {
-        return userRepository.save(user);
+    public ProfileUserInfoDto save(ProfileUserInfoDto profileUserInfoDto) {
+        return converter.toDto(userRepository.save(converter.toEntity(profileUserInfoDto)));
     }
 
     @Override
     @Transactional
-    public User update(Long id, User user) {
+    public ProfileUserInfoDto update(Long id, ProfileUserInfoDto profileUserInfoDto) {
         userRepository.findById(id).orElseThrow(UserNotFoundException::new);
-        return userRepository.save(user);
+        return converter.toDto(userRepository.save(converter.toEntity(profileUserInfoDto)));
     }
 
     @Override
@@ -53,6 +58,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return userRepository.findByUsername(username).orElseThrow(UserNotFoundException::new);
+        return userDetailsRepository.findByUsername(username).orElseThrow(UserNotFoundException::new);
     }
 }

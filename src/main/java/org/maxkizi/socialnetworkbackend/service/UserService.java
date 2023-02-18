@@ -1,17 +1,18 @@
 package org.maxkizi.socialnetworkbackend.service;
 
-import org.maxkizi.socialnetworkbackend.entity.User;
+import org.maxkizi.socialnetworkbackend.dto.ProfileUserInfoDto;
+import org.maxkizi.socialnetworkbackend.dto.ShortUserInfoDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 public interface UserService {
-    Page<User> findAll(Pageable pageable);
+    Page<ShortUserInfoDto> findAll(Pageable pageable);
 
-    User findById(Long id);
+    ProfileUserInfoDto findById(Long id);
 
-    User save(User user);
+    ProfileUserInfoDto save(ProfileUserInfoDto profileUserInfoDto);
 
-    User update(Long id, User user);
+    ProfileUserInfoDto update(Long id, ProfileUserInfoDto profileUserInfoDto);
 
     void delete(Long id);
 

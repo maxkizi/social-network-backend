@@ -1,0 +1,25 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+
+    <changeSet author="maxkizi" id="2023-02-15-init-posts-table">
+        <createTable tableName="posts" remarks="Таблица постов пользователей">
+            <column name="id" type="bigint" autoIncrement="true" remarks="id">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="text" type="text" remarks="Текст поста">
+            </column>
+            <column name="date_created" type="timestamp" remarks="Дата создания">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date_updated" type="timestamp" remarks="Дата обновления">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="bigint" remarks="Ссылка на таблицу пользователей">
+                <constraints foreignKeyName="fk_posts_users_id" references="users(id)"/>
+            </column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

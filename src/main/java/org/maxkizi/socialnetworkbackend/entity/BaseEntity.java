@@ -1,5 +1,6 @@
 package org.maxkizi.socialnetworkbackend.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
@@ -13,6 +14,7 @@ import java.time.LocalDateTime;
 @Data
 @SuperBuilder(toBuilder = true)
 @NoArgsConstructor
+@AllArgsConstructor
 public class BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,7 +22,6 @@ public class BaseEntity {
     @Column(name = "date_created")
     @CreationTimestamp
     private LocalDateTime createdAt;
-
     @Column(name = "date_updated")
     @UpdateTimestamp
     private LocalDateTime updatedAt;

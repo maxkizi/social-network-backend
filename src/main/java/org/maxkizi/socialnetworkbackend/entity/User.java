@@ -1,7 +1,7 @@
 package org.maxkizi.socialnetworkbackend.entity;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
@@ -10,11 +10,11 @@ import java.util.List;
 import java.util.Set;
 
 @AllArgsConstructor
-@Data
 @NoArgsConstructor
 @SuperBuilder(toBuilder = true)
 @Entity
 @Table(name = "users")
+@Getter
 public class User extends BaseEntity {
     @Column(name = "photo_url")
     private String userPhotoUrl;
@@ -28,12 +28,19 @@ public class User extends BaseEntity {
     private String status;
     @Column(name = "info")
     private String info;
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = {CascadeType.REMOVE})
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = {CascadeType.REMOVE, CascadeType.PERSIST})
     private List<Post> posts;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "user_followers_binding",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "follower_id"))
-    private Set<User> friends;
+    private Set<User> followers;
+
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "followers")
+    private Set<User> followed;
+
+    private Set<User> getFollowed() {
+        return followed;
+    }
 }

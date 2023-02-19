@@ -8,9 +8,7 @@ import org.springframework.boot.web.servlet.ServletComponentScan;
 @SpringBootApplication
 @ServletComponentScan
 public class SocialNetworkBackendApplication {
-
     public static void main(String[] args) {
         SpringApplication.run(SocialNetworkBackendApplication.class, args);
     }
-
 }

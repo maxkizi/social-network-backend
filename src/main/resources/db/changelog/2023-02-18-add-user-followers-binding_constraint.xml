@@ -1,0 +1,11 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+
+    <changeSet author="maxkizi" id="2023-02-18-add-user-followers-binding_constraint">
+        <addUniqueConstraint tableName="user_followers_binding" columnNames="user_id, follower_id"
+                             constraintName="uq_user_followers_binding_user_id_follower_id"/>
+    </changeSet>
+</databaseChangeLog>

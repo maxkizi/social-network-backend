@@ -6,7 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 public interface UserService {
-    Page<ShortUserInfoDto> findAll(Pageable pageable);
+    Page<ShortUserInfoDto> findAll(Pageable pageable, Long principalId);
 
     ProfileUserInfoDto findById(Long id);
 

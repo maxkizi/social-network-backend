@@ -33,10 +33,10 @@ class UserServiceImplTest extends BaseIntegrationTest {
 
     @Test
     void saveAndFindAll() {
-        userService.save(testDataProvider.buildUserProfileDto(1));
+        ProfileUserInfoDto savedUser = userService.save(testDataProvider.buildUserProfileDto(1));
         userService.save(testDataProvider.buildUserProfileDto(2));
 
-        Assertions.assertEquals(2, userService.findAll(Pageable.unpaged()).getTotalElements());
+        Assertions.assertEquals(2, userService.findAll(Pageable.unpaged(), savedUser.getId()).getTotalElements());
     }
 
     @Test

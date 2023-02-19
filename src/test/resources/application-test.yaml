@@ -6,8 +6,12 @@ spring:
 #    username: postgres
 #    password: postgres
 #    driver-class-name: org.testcontainers.jdbc.ContainerDatabaseDriver
+  jpa:
+    open-in-view: false
+    show-sql: true
+    hibernate:
+      ddl-auto: none
   datasource:
-    url: jdbc:h2:mem:mydb
-    username: sa
-    password: password
-    driverClassName: org.h2.Driver
+    url: jdbc:postgresql://localhost:5432/social_network_test
+    password: postgres
+    username: postgres

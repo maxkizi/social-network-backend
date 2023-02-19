@@ -4,4 +4,6 @@ spring:
     password: postgres
     username: postgres
 security:
-  enabled: false
+  enabled: true
+#  if security is disabled then principal with principalId will be created
+  principalUsername: maxkizi

@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PostDto {
+    private Long id;
     private String text;
     private String createdAt;
     private String updatedAt;

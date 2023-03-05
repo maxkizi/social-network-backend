@@ -10,6 +10,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import static org.maxkizi.socialnetworkbackend.controller.Controllers.PROFILE_BY_ID;
@@ -29,5 +31,12 @@ public class UserController {
     @GetMapping(PROFILE_BY_ID)
     public ProfileUserInfoDto findById(@PathVariable(name = "id") Long id) {
         return userService.findById(id);
+    }
+
+    @PutMapping(PROFILE_BY_ID)
+    public ProfileUserInfoDto update(@PathVariable(name = "id") Long id,
+                                     @RequestBody ProfileUserInfoDto profileDto) {
+
+        return userService.update(id, profileDto);
     }
 }

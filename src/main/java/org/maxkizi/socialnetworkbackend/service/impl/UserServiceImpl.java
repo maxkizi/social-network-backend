@@ -63,8 +63,10 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Override
     @Transactional
     public ProfileUserInfoDto update(Long id, ProfileUserInfoDto profileUserInfoDto) {
-        userRepository.findById(id).orElseThrow(UserNotFoundException::new);
-        return converter.toDto(userRepository.save(converter.toEntity(profileUserInfoDto)));
+        User foundUser = userRepository.findById(id).orElseThrow(UserNotFoundException::new);
+        User userForSave = converter.toEntity(profileUserInfoDto);
+        userForSave.setFollowers(foundUser.getFollowers());
+        return converter.toDto(userRepository.save(userForSave));
     }
 
     @Override

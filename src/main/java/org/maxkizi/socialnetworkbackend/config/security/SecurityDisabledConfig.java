@@ -32,9 +32,11 @@ public class SecurityDisabledConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                .csrf().disable()
-                .cors()
+                    .sessionManagement()
                 .and()
+                    .cors()
+                .and()
+                    .csrf().disable()
                 .addFilterAfter(new OncePerRequestFilter() {
                     @Override
                     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {

@@ -8,8 +8,11 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class MapperConfig {
+
     @Bean
     public UserDtoConverter userDtoMapper() {
         return Mappers.getMapper(UserDtoConverter.class);
     }
+
+
 }

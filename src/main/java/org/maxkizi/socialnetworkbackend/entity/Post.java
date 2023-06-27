@@ -3,12 +3,14 @@ package org.maxkizi.socialnetworkbackend.entity;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 
 @Data
 @SuperBuilder(toBuilder = true)
 @Entity
+@DynamicUpdate
 @Table(name = "posts")
 @NoArgsConstructor
 public class Post extends BaseEntity {

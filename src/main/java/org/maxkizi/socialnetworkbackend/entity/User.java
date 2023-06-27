@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -22,6 +23,7 @@ import java.util.Set;
 @NoArgsConstructor
 @SuperBuilder(toBuilder = true)
 @Entity
+@DynamicUpdate
 @Table(name = "users")
 @Getter
 @Setter

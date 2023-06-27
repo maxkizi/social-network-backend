@@ -72,4 +72,5 @@ class FollowerServiceImplTest extends BaseIntegrationTest {
         followerService.follow(user1.getId(), user2.getId());
         Assertions.assertThrows(UserAlreadyFollowerException.class, () -> followerService.follow(user1.getId(), user2.getId()));
     }
+
 }

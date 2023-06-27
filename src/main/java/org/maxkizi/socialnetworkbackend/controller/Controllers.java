@@ -6,7 +6,7 @@ import lombok.experimental.UtilityClass;
 public final class Controllers {
     private static final String BASE_URL = "/api/v1";
     private static final String BY_ID = "/{id}";
-    private static final String PROFILE = BASE_URL + "/profile";
+    public static final String PROFILE = BASE_URL + "/profile";
     private static final String AUTH = "/auth";
 
     public static final String USERS = BASE_URL + "/users";

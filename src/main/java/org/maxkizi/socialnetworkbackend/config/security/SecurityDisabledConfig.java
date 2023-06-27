@@ -1,6 +1,7 @@
 package org.maxkizi.socialnetworkbackend.config.security;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.maxkizi.socialnetworkbackend.repository.UserDetailsRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -14,6 +15,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+import javax.annotation.PostConstruct;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -24,6 +26,7 @@ import java.io.IOException;
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
+@Slf4j
 public class SecurityDisabledConfig {
     @Value("${security.principalUsername}")
     private String principalUsername;
@@ -55,5 +58,8 @@ public class SecurityDisabledConfig {
         return http.build();
     }
 
-
+    @PostConstruct
+    public void printWarn(){
+        log.warn("SECURITY DISABLED, PRINCIPAL USER WITH USERNAME: {}", principalUsername);
+    }
 }

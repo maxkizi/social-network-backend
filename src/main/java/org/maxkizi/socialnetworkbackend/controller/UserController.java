@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import static org.maxkizi.socialnetworkbackend.controller.Controllers.PROFILE;
 import static org.maxkizi.socialnetworkbackend.controller.Controllers.PROFILE_BY_ID;
 import static org.maxkizi.socialnetworkbackend.controller.Controllers.USERS;
 
@@ -33,10 +34,10 @@ public class UserController {
         return userService.findById(id);
     }
 
-    @PutMapping(PROFILE_BY_ID)
-    public ProfileUserInfoDto update(@PathVariable(name = "id") Long id,
-                                     @RequestBody ProfileUserInfoDto profileDto) {
-
-        return userService.update(id, profileDto);
+    @PutMapping(PROFILE)
+    public ProfileUserInfoDto update(@RequestBody ProfileUserInfoDto profileDto,
+                                     Authentication authentication) {
+        BaseEntity principal = (BaseEntity) authentication.getPrincipal();
+        return userService.update(principal.getId(), profileDto);
     }
 }

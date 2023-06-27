@@ -8,6 +8,10 @@
     <include file="db/changelog/2023-02-15-init-posts-table.xml"/>
     <include file="db/changelog/2023-02-18-add-user-followers-binding.xml"/>
     <include file="db/changelog/2023-02-18-add-user-followers-binding_constraint.xml"/>
+    <include file="db/changelog/2023-05-30-01-add_username_unique-constr.xml"/>
+
+            <!--    dev script for inserting test users, have to delete in prod   -->
+    <include file="db/changelog/2023-05-30-02-dev-script-for-inserting-test-users.xml"/>
 
 
 </databaseChangeLog>
